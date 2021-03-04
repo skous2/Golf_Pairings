@@ -2,6 +2,7 @@ import streamlit as st
 import pandas
 import numpy
 import sys
+import os
 
 st.title('Unique Golf Pairings') 
 
@@ -38,7 +39,7 @@ def make_pairings(num, div):
     if num%div == 0:
         
         players = list(range(num))
-    	
+        
         day1 = pandas.DataFrame(numpy.array(players).reshape(int(num/div),div))
         
         first= numpy.array(players)[0:int(num/div)]
@@ -86,5 +87,9 @@ try:
     st.write("Round 3:", day3)
     #st.write("Golferlist", golfer_input)
     #st.write("len", len(playerslist))
+    if st.button('Send text results to Desktop'):
+        path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\pairings.txt')
+        with open(path, 'w') as f:
+            print('Day1:\n' + day1.to_string() + '\n\n\nDay2:\n' + day2.to_string() + '\n\n\nDay2:\n' + day3.to_string(), file=f) 
 except:
     st.write("The current configuration of the parameters does not yield a valid result")
