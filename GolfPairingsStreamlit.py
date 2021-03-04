@@ -5,22 +5,31 @@ import sys
 
 st.title('Unique Golf Pairings') 
 
-page_bg_img = '''
-<style>
-body {
-background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJswd0L7Q3dY3d1Zlsv-CmhhaB2LH3TPhIw&usqp=CAU");
-background-size: cover;
-}
-</style>
-'''
+# page_bg_img = '''
+# <style>
+# body {
+# background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJswd0L7Q3dY3d1Zlsv-CmhhaB2LH3TPhIw&usqp=CAU");
+# background-size: cover;
+# }
+# </style>
+# '''
 
-st.markdown(page_bg_img, unsafe_allow_html=True)
+# st.markdown(page_bg_img, unsafe_allow_html=True)
 
-num = st.slider('How many players for your tournament? *Note: must be divisible by 3 or 4')  
-st.write('** For the pairings to be completely unique, the minimum # of players needs to be 9 for pairings of 3 and 16 for pairings of 4')
+#num = st.slider('How many players for your tournament? *Note: must be divisible by 3 or 4', min_value=9)  
+#st.write('** For the pairings to be completely unique, the minimum # of players needs to be 9 for pairings of 3 and 16 for pairings of 4')
 
-div = st.slider('Size of the group',min_value=3, max_value=4)  
+#div = st.slider('Size of the group',min_value=3, max_value=4)  
 #st.write(x, 'Players. Great!')
+
+div = st.radio("Size of the group", [3,4])
+
+golfer_input = st.text_area("Golfer list")
+playerslist = golfer_input.split('\n')
+
+st.write("You currently have {0}".format(len(playerslist)) + " players entered")
+
+num = len(playerslist)
 
 
 def make_pairings(num, div):
@@ -57,7 +66,13 @@ def make_pairings(num, div):
                        +day2col4[0:len(day2col4) - 3])
             day3 = pandas.DataFrame({0:first,1:day3col2,2:day3col3,3:day3col4})
         
-        
+        counter = 0
+        for player in playerslist:
+            day1 = day1.replace(counter,player)
+            day2 = day2.replace(counter,player)
+            day3 = day3.replace(counter,player)
+            counter += 1
+
         day1 = day1.rename(columns=lambda s: 'Player_' + str(s+1), index=lambda s: 'Pairing_' + str(s+1))
         day2 = day2.rename(columns=lambda s: 'Player_' + str(s+1), index=lambda s: 'Pairing_' + str(s+1))
         day3 = day3.rename(columns=lambda s: 'Player_' + str(s+1), index=lambda s: 'Pairing_' + str(s+1))
@@ -69,5 +84,7 @@ try:
     st.write("Round 1:", day1)
     st.write("Round 2:", day2)
     st.write("Round 3:", day3)
+    #st.write("Golferlist", golfer_input)
+    #st.write("len", len(playerslist))
 except:
-    st.write("The current configuration of the parameters does not yield a returnable result")
+    st.write("The current configuration of the parameters does not yield a valid result")
