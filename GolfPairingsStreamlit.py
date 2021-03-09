@@ -23,6 +23,8 @@ st.title('Unique Golf Pairings')
 #div = st.slider('Size of the group',min_value=3, max_value=4)  
 #st.write(x, 'Players. Great!')
 
+### Create a way to shuffle the list.
+
 div = st.radio("Size of the group", [3,4])
 
 golfer_input = st.text_area("Golfer list")
@@ -31,6 +33,19 @@ playerslist = golfer_input.split('\n')
 st.write("You currently have {0}".format(len(playerslist)) + " players entered")
 
 num = len(playerslist)
+ghosts = 0
+
+if (num%4 != 0 and div == 4):
+    ghosts = 4-(num%4)
+    if ghosts == 1:
+        playerslist.append('Ghost1')
+    elif ghosts == 2:
+        playerslist.append('Ghost2')
+        playerslist.insert(0,'Ghost1')
+    else:
+        playerslist.append('Ghost3')
+        playerslist.insert(0,'Ghost1')
+        playerslist.insert(int((num/4)+3),'Ghost2')
 
 
 def make_pairings(num, div):
@@ -80,8 +95,9 @@ def make_pairings(num, div):
 
     return day1, day2, day3
 
+
 try:
-    day1,day2,day3 = make_pairings(num, div)
+    day1,day2,day3 = make_pairings(len(playerslist), div)
     st.write("Round 1:", day1)
     st.write("Round 2:", day2)
     st.write("Round 3:", day3)
