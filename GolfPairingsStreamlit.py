@@ -3,9 +3,9 @@ import pandas
 import numpy
 import sys
 import os
+import random
 
 st.title('Unique Golf Pairings') 
-
 # page_bg_img = '''
 # <style>
 # body {
@@ -31,6 +31,30 @@ golfer_input = st.text_area("Golfer list")
 playerslist = golfer_input.split('\n')
 
 st.write("You currently have {0}".format(len(playerslist)) + " players entered")
+
+reshuffle = st.radio('I want a shuffled list', ['No','Yes'])
+
+if reshuffle == 'Yes':
+    random.shuffle(playerslist)
+    
+    # shuffled  = True
+    # playerslist = golfer_input.split('\n')
+    # random.shuffle(playerslist)
+    # num = len(playerslist)
+    # ghosts = 0
+
+    # if (num%4 != 0 and div == 4):
+    #   ghosts = 4-(num%4)
+    #   if ghosts == 1:
+    #       playerslist.append('Ghost1')
+    #   elif ghosts == 2:
+    #       playerslist.append('Ghost2')
+    #       playerslist.insert(0,'Ghost1')
+    #   else:
+    #       playerslist.append('Ghost3')
+    #       playerslist.insert(0,'Ghost1')
+    #       playerslist.insert(int((num/4)+3),'Ghost2')
+
 
 num = len(playerslist)
 ghosts = 0
@@ -98,6 +122,7 @@ def make_pairings(num, div):
 
 try:
     day1,day2,day3 = make_pairings(len(playerslist), div)
+    
     st.write("Round 1:", day1)
     st.write("Round 2:", day2)
     st.write("Round 3:", day3)
@@ -106,6 +131,7 @@ try:
     if st.button('Send text results to Desktop'):
         path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\pairings.txt')
         with open(path, 'w') as f:
-            print('Day1:\n' + day1.to_string() + '\n\n\nDay2:\n' + day2.to_string() + '\n\n\nDay2:\n' + day3.to_string(), file=f) 
+            print('Day1:\n' + day1.to_string() + '\n\n\nDay2:\n' + day2.to_string() + '\n\n\nDay3:\n' + day3.to_string(), file=f) 
+    st.write('Note: clicking this will reshuffle the list if that option is checked')
 except:
     st.write("The current configuration of the parameters does not yield a valid result")
