@@ -5,7 +5,7 @@ import sys
 import os
 import random
 
-st.title('Unique Golf Pairings') 
+st.title('Unique Golf Pairings - Tournament') 
 # page_bg_img = '''
 # <style>
 # body {
