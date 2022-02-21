@@ -130,6 +130,7 @@ try:
     #st.write("len", len(playerslist))
     if st.button('Send text results to Desktop'):
         path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\pairings.txt')
+        st.write(path)
         with open(path, 'w') as f:
             print('Day1:\n' + day1.to_string() + '\n\n\nDay2:\n' + day2.to_string() + '\n\n\nDay3:\n' + day3.to_string(), file=f) 
     st.write('Note: clicking this will reshuffle the list if that option is checked')
