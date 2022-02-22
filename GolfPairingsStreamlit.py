@@ -138,7 +138,7 @@ try:
     st.write('=OFFSET(\$A$1,COLUMNS(\$A1:A1)-1+(ROWS($1:1)-1)*4,0)')
     st.download_button(
     label="DOWNLOAD!",
-    data='Day1:\n' + day1.to_string() + '\n\n\nDay2:\n' + day2.to_string() + '\n\n\nDay3:\n' + day3.to_string(),
+    data='Trees',
     file_name="pairings.txt",
     mime="text/plain"
     )
