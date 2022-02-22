@@ -128,6 +128,7 @@ try:
     st.write("Round 3:", day3)
     #st.write("Golferlist", golfer_input)
     #st.write("len", len(playerslist))
+    path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\pairings.txt')
     if st.button('Send text results to Desktop'):
         #path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\pairings.txt')
         st.write('path')
