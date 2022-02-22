@@ -139,4 +139,4 @@ try:
 except:
     st.write("The current configuration of the parameters does not yield a valid result")
 
-st.download_button("DOWNLOAD!", data="Trees", file_name="pairings.txt")
+#st.download_button("DOWNLOAD!", data="Trees", file_name="pairings.txt")
