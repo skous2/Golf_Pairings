@@ -125,12 +125,12 @@ try:
     
     st.write("Round 1:", day1)
     st.write("Round 2:", day2)
-    st.write("Round 3:", day3)
+    st.write("Round Test 3:", day3)
     #st.write("Golferlist", golfer_input)
     #st.write("len", len(playerslist))
     if st.button('Send text results to Desktop'):
         path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop\\pairings.txt')
-        st.write(path)
+        st.write('path')
         with open(path, 'w') as f:
             print('Day1:\n' + day1.to_string() + '\n\n\nDay2:\n' + day2.to_string() + '\n\n\nDay3:\n' + day3.to_string(), file=f) 
     st.write('Note: clicking this will reshuffle the list if that option is checked')
